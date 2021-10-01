@@ -1,6 +1,5 @@
 import 'dart:convert';
 // import 'dart:ffi';
-import 'dart:wasm';
 
 PostPascabayar postFromJson(String str) =>
     PostPascabayar.fromJson(json.decode(str));

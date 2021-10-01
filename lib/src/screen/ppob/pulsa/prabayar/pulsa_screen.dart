@@ -36,9 +36,9 @@ class _PulsaPageState extends State<PulsaPage> {
   TextEditingController _controllerNomor = TextEditingController();
   LocalService _localService = LocalService();
   List<Nominal> _nominal = List<Nominal>();
-  List<Nominal> _nominalForDisplay = List<Nominal>();
-  List<Provider> _provider = List<Provider>();
-  List<Provider> _providerForDisplay = List<Provider>();
+  List<Nominal> _nominalForDisplay = <Nominal>[];
+  List<Provider> _provider = <Provider>[];
+  List<Provider> _providerForDisplay = <Provider>[];
   // static const platfsorm = MethodChannel('flutter_contacts/launch_contacts');
 
   @override
@@ -288,69 +288,69 @@ class _PulsaPageState extends State<PulsaPage> {
 
   Widget _btnListView(List<Listharga> hargaList) {
     return Container(
-        height: 200.0,
-        child: GridView.builder(
-            shrinkWrap: true,
-            // physics: NeverScrollableScrollPhysics(),
-            itemCount: hargaList == null ? 0 : hargaList.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              childAspectRatio: 2,
-            ),
-            itemBuilder: (BuildContext context, int index) {
-              bool isSelected = _nominalIndex == index;
-              int a = hargaList[index].nominalPulsa;
-              int b = 1500;
-              var jmh = a + b;
-              return GestureDetector(
+      height: 200.0,
+      child: GridView.builder(
+          shrinkWrap: true,
+          // physics: NeverScrollableScrollPhysics(),
+          itemCount: hargaList == null ? 0 : hargaList.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            childAspectRatio: 2,
+          ),
+          itemBuilder: (BuildContext context, int index) {
+            bool isSelected = _nominalIndex == index;
+            int a = hargaList[index].nominalPulsa;
+            int b = 1500;
+            var jmh = a + b;
+            return GestureDetector(
+              child: Container(
+                padding: EdgeInsets.all(12.0),
+                alignment: Alignment.centerLeft,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(6),
+                  border: Border.all(
+                      color: isSelected
+                          ? Colors.green.withOpacity(0.8)
+                          : Colors.grey[700].withOpacity(0.5)),
+                  color: Colors.white,
+                ),
                 child: Container(
-                  padding: EdgeInsets.all(12.0),
-                  alignment: Alignment.centerLeft,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(6),
-                    border: Border.all(
-                        color: isSelected
-                            ? Colors.green.withOpacity(0.8)
-                            : Colors.grey[700].withOpacity(0.5)),
-                    color: Colors.white,
-                  ),
-                  child: Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          formatRupiah(hargaList[index].nominalPulsa)
-                              .replaceAll("Rp ", "")
-                              .toString(),
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: isSelected ? Colors.green : null),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        formatRupiah(hargaList[index].nominalPulsa)
+                            .replaceAll("Rp ", "")
+                            .toString(),
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: isSelected ? Colors.green : null),
+                      ),
+                      Text(
+                        formatRupiah(jmh).replaceAll("Rp ", "Rp"),
+                        style: TextStyle(
+                          fontSize: 12,
                         ),
-                        Text(
-                          formatRupiah(jmh).replaceAll("Rp ", "Rp"),
-                          style: TextStyle(
-                            fontSize: 12,
-                          ),
-                        )
-                      ],
-                    ),
+                      )
+                    ],
                   ),
                 ),
-                onTap: () {
-                  FocusScope.of(context).requestFocus(new FocusNode());
-                  setState(() {
-                    _nominalIndex = index;
-                  });
-                  if (_nominalIndex == index) {
-                    inputNominal = hargaList[index].nominalPulsa.toString();
-                    hargaNominal = formatRupiah(jmh).replaceAll("Rp ", "Rp");
-                  }
-                },
-              );
-            }),
+              ),
+              onTap: () {
+                FocusScope.of(context).requestFocus(new FocusNode());
+                setState(() {
+                  _nominalIndex = index;
+                });
+                if (_nominalIndex == index) {
+                  inputNominal = hargaList[index].nominalPulsa.toString();
+                  hargaNominal = formatRupiah(jmh).replaceAll("Rp ", "Rp");
+                }
+              },
+            );
+          }),
     );
   }
 

@@ -93,7 +93,7 @@ class _PulsaPascaPageState extends State<PulsaPascaPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      resizeToAvoidBottomPadding: false,
+      // resizeToAvoidBottomPadding: false,
       body: Form(key: _key, autovalidate: _validate, child: _formNomorInput()),
     );
   }
